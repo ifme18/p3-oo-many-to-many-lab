@@ -41,13 +41,13 @@ class Book:
 
 class Contract:
     all = []
-
+    
     def __init__(self, author, book, date, royalties):
+        self.author = author  # Uses the setter
+        self.book = book      # Uses the setter
+        self.date = date      # Uses the setter
+        self.royalties = royalties  # Uses the setter
         Contract.all.append(self)
-        self.author = author
-        self.book = book
-        self.royalties = int(royalties)
-        self.date = str(date)
 
     @property
     def author(self):
@@ -58,7 +58,7 @@ class Contract:
         if isinstance(value, Author):
             self._author = value
         else:
-            raise Exception("Author must be of type Author")
+            raise Exception("Author must be an instance of the Author class.")
 
     @property
     def book(self):
@@ -69,7 +69,7 @@ class Contract:
         if isinstance(value, Book):
             self._book = value
         else:
-            raise Exception("Book must be of type Book")
+            raise Exception("Book must be an instance of the Book class.")
 
     @property
     def date(self):
@@ -81,6 +81,17 @@ class Contract:
             self._date = value
         else:
             raise Exception("Date must be of type str.")
+
+    @property
+    def royalties(self):
+        return self._royalties
+
+    @royalties.setter
+    def royalties(self, value):
+        if isinstance(value, (int, float)) and value > 0:
+            self._royalties = value
+        else:
+            raise Exception("Royalties must be a positive number.")
 
     @classmethod
     def contracts_by_date(cls, date):
