@@ -48,6 +48,8 @@ class Contract:
         self.date = date      # Uses the setter
         self.royalties = royalties  # Uses the setter
         Contract.all.append(self)
+        if author not in book._authors:
+            book._authors.append(author)
 
     @property
     def author(self):
